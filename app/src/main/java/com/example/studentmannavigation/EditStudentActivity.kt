@@ -7,21 +7,31 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 class EditStudentActivity : AppCompatActivity() {
+    private lateinit var editName: EditText
+    private lateinit var editId: EditText
+    private var pos: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_student)
 
-        val editHoten = findViewById<EditText>(R.id.edit_hoten)
-        val editMssv = findViewById<EditText>(R.id.edit_mssv)
+        editName = findViewById(R.id.edit_name)
+        editId = findViewById(R.id.edit_id)
+
+        // Retrieve the student's data from the intent
+        pos = intent.getIntExtra("pos", -1)
+        editName.setText(intent.getStringExtra("student_name"))
+        editId.setText(intent.getStringExtra("student_id"))
 
         findViewById<Button>(R.id.button_edit_ok).setOnClickListener {
-            val hoten = editHoten.text.toString()
-            val mssv = editMssv.text.toString()
-
-            intent.putExtra("hoten", hoten)
-            intent.putExtra("mssv", mssv)
-
-            setResult(Activity.RESULT_OK, intent)
+            val name = editName.text.toString()
+            val id = editId.text.toString()
+            val data = intent.apply {
+                putExtra("pos", pos)
+                putExtra("student_name", name)
+                putExtra("student_id", id)
+            }
+            setResult(Activity.RESULT_OK, data)
             finish()
         }
 

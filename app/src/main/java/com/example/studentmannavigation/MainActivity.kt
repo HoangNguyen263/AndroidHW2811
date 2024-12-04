@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentTransaction
 
 class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<StudentModel>
@@ -41,12 +42,12 @@ class MainActivity : AppCompatActivity() {
     ) { result: ActivityResult ->
         if (result.resultCode == RESULT_OK) {
             val pos = result.data?.getIntExtra("pos", -1) ?: -1
-            val hoten = result.data?.getStringExtra("hoten")
-            val mssv = result.data?.getStringExtra("mssv")
+            val studentName = result.data?.getStringExtra("student_name")
+            val studentId = result.data?.getStringExtra("student_id")
 
-            if (pos != -1 && !hoten.isNullOrEmpty() && !mssv.isNullOrEmpty()) {
-                students[pos] = StudentModel(hoten, mssv)
-                adapter.notifyDataSetChanged() // Cập nhật ListView
+            if (pos != -1 && !studentName.isNullOrEmpty() && !studentId.isNullOrEmpty()) {
+                students[pos] = StudentModel(studentName, studentId)
+                adapter.notifyDataSetChanged()
             }
         }
     }
@@ -99,8 +100,8 @@ class MainActivity : AppCompatActivity() {
             R.id.action_edit_student -> {
                 val intent = Intent(this, EditStudentActivity::class.java).apply {
                     putExtra("pos", pos)
-                    putExtra("hoten", students[pos].studentName)
-                    putExtra("mssv", students[pos].studentId)
+                    putExtra("student_name", students[pos].studentName)
+                    putExtra("student_id", students[pos].studentId)
                 }
                 editStudentLauncher.launch(intent)
             }
@@ -108,10 +109,6 @@ class MainActivity : AppCompatActivity() {
                 students.removeAt(pos)
                 adapter.notifyDataSetChanged()
                 Toast.makeText(this, "Removed student", Toast.LENGTH_LONG).show()
-            }
-            R.id.action_add_student -> {
-                val intent = Intent(this, AddStudentActivity::class.java)
-                addStudentLauncher.launch(intent)
             }
         }
         return super.onContextItemSelected(item)

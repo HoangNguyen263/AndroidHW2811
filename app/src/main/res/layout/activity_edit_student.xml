@@ -8,7 +8,7 @@
     tools:context=".EditStudentActivity">
 
     <EditText
-        android:id="@+id/edit_hoten"
+        android:id="@+id/edit_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edit_mssv"
+        android:id="@+id/edit_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -27,7 +27,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_hoten" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_name" />
 
     <Button
         android:id="@+id/button_edit_cancel"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mssv" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_id" />
 
     <Button
         android:id="@+id/button_edit_ok"
@@ -43,5 +43,5 @@
         android:layout_height="wrap_content"
         android:text="OK"
         app:layout_constraintEnd_toStartOf="@+id/button_edit_cancel"
-        app:layout_constraintTop_toBottomOf="@+id/edit_mssv" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_id" />
 </androidx.constraintlayout.widget.ConstraintLayout>
